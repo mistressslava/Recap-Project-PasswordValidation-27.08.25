@@ -20,20 +20,6 @@ public final class PasswordValidator {
             }
         }
         return false;
-
-//        String numbers = "0123456789";
-//
-//        ArrayList<Character> numbs = new ArrayList<>();
-//
-//        for (int i = 0; i < numbers.length(); i++) {
-//            numbs.add(numbers.charAt(i));
-//        }
-//
-//        for (int i = 0; i < numbs.size(); i++) {
-//            if (password.contains(numbs.get(i).toString())) {
-//                return true;
-//            }
-//        }
     }
 
     public static boolean containsUpperAndLower(String password) {

@@ -313,4 +313,9 @@ public class PasswordValidatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void isValid_shouldIgnoreLeadingTrailingSpaces_forCommonCheckOnly() {
+        assertFalse(PasswordValidator.isValid("  PaSsWoRt1  "));
+    }
+
 }
