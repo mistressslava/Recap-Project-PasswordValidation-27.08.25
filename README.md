@@ -12,7 +12,7 @@ This project demonstrates a password validation system.
 - Contains both **uppercase** and **lowercase** letters  
 - Must **not appear in a list of common/weak passwords**  
 - Contains at least **one special character** (e.g., `! @ # $ % ^ & *`)  
-- Contains characters from at least **3 out of 4 groups**:  
+- Contains characters from **4 groups**: 
   - Uppercase letters  
   - Lowercase letters  
   - Digits  
