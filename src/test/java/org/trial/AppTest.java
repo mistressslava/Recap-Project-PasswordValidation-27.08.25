@@ -1,11 +1,13 @@
 package org.trial;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
     @Test
     void shouldAnswerWithTrue() {
-        assertTrue(1 + 1 == 2);
+        assertEquals(1 + 1, 2);
     }
 }
