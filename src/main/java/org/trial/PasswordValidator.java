@@ -3,7 +3,8 @@ package org.trial;
 import java.util.*;
 
 public final class PasswordValidator {
-    static final Set<String> commonPasswords = new HashSet<>(Arrays.asList("password", "passwort1", "12345678", "aa345678"));
+    static final Set<String> COMMON_PASSWORDS = new HashSet<>(Arrays.asList("password", "passwort1", "12345678", "aa345678"));
+    static final String ALLOWED_SPECIALS = "!@#$%^&*()-_+=?.,;:";
 
     public static boolean hasMinLength(String password, int min) {
         return password != null && !password.isEmpty() && password.length() >= min;
@@ -53,7 +54,19 @@ public final class PasswordValidator {
 
     public static boolean isCommonPassword(String password) {
         String p = (password == null ? "" : password.trim().toLowerCase(Locale.ROOT));
-        return commonPasswords.contains(p);
+        return COMMON_PASSWORDS.contains(p);
+    }
+
+    public static boolean containsSpecialChar(String password) {
+        if (password == null || password.isEmpty()) return false;
+
+        for (int i = 0; i < password.length(); i++) {
+            if (ALLOWED_SPECIALS.contains(String.valueOf(password.charAt(i)))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static boolean isValid(String password) {
@@ -77,13 +90,15 @@ public final class PasswordValidator {
             return false;
         }
 
+        if (!containsSpecialChar(password)) {
+            System.out.println("Password must contain at least one special char: '!@#$%^&*()-_+=?.,;:'");
+            return false;
+        }
+
         // final
         System.out.println("Password is valid!");
         return true;
     }
-
-//    public static boolean containsSpecialChar(String password, String allowed);
-
 
 
 }
