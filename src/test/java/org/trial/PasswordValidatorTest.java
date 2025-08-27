@@ -238,7 +238,7 @@ public class PasswordValidatorTest {
 
     @Test
     void isValid_shouldBeTrue_whenStrIs_ThisisValidPassword() {
-        String str = "ThisisValidPassword2";
+        String str = "ThisisValidPassword2!";
 
         boolean expected = true;
 
@@ -316,6 +316,36 @@ public class PasswordValidatorTest {
     @Test
     void isValid_shouldIgnoreLeadingTrailingSpaces_forCommonCheckOnly() {
         assertFalse(PasswordValidator.isValid("  PaSsWoRt1  "));
+    }
+
+    @Test
+    void containsSpecialChar_shouldReturnFalse_whenNoSpecialChar() {
+        String password = "HelloWorld123";
+        assertFalse(PasswordValidator.containsSpecialChar(password));
+    }
+
+    @Test
+    void containsSpecialChar_shouldReturnTrue_whenHasExclamationMark() {
+        String password = "Password123!";
+        assertTrue(PasswordValidator.containsSpecialChar(password));
+    }
+
+    @Test
+    void containsSpecialChar_shouldReturnTrue_whenHasUnderscore() {
+        String password = "Test_Valid";
+        assertTrue(PasswordValidator.containsSpecialChar(password));
+    }
+
+    @Test
+    void containsSpecialChar_shouldReturnFalse_whenEmptyString() {
+        String password = "";
+        assertFalse(PasswordValidator.containsSpecialChar(password));
+    }
+
+    @Test
+    void containsSpecialChar_shouldReturnFalse_whenNullInput() {
+        String password = null;
+        assertFalse(PasswordValidator.containsSpecialChar(password));
     }
 
 }
