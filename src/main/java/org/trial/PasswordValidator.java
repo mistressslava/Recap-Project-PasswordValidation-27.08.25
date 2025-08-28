@@ -1,13 +1,17 @@
 package org.trial;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 public final class PasswordValidator {
     static final Set<String> COMMON_PASSWORDS = new HashSet<>(Arrays.asList("password", "passwort1", "12345678", "aa345678"));
     static final String ALLOWED_SPECIALS = "!@#$%^&*()-_+=?.,;:";
+    static final int MIN_LENGTH = 8;
+    static final String uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static final String lowers = "abcdefghijklmnopqrstuvwxyz";
 
     public static boolean hasMinLength(String password, int min) {
-        return password != null && !password.isEmpty() && password.length() >= min;
+        return password != null && password.length() >= min;
     }
 
     public static boolean containsDigit(String password) {
@@ -26,9 +30,6 @@ public final class PasswordValidator {
     public static boolean containsUpperAndLower(String password) {
         if (password == null || password.isEmpty()) return false;
         if (password.length() == 1) return false;
-
-        String uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowers = "abcdefghijklmnopqrstuvwxyz";
 
         boolean foundUpper = false;
         boolean foundLower = false;
@@ -70,6 +71,7 @@ public final class PasswordValidator {
     }
 
     public static boolean isValid(String password) {
+        if (password == null || password.isEmpty()) return false;
         if (!hasMinLength(password, 8)) {
             System.out.println("Password must be at least 8 characters long.");
             return false;
@@ -100,5 +102,33 @@ public final class PasswordValidator {
         return true;
     }
 
+    public static String generateSecurePassword() {
 
+        SecureRandom secureRandom = new SecureRandom();
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < 4; i++) {
+
+            str.append(uppers.charAt(secureRandom.nextInt(uppers.length())));
+            str.append(lowers.charAt(secureRandom.nextInt(lowers.length())));
+            str.append(ALLOWED_SPECIALS.charAt(secureRandom.nextInt(ALLOWED_SPECIALS.length())));
+            str.append(secureRandom.nextInt(10));
+
+        }
+        System.out.println("Old str: " + str);
+
+        List<String> newStrList = new ArrayList<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            newStrList.add(String.valueOf(str.charAt(i)));
+        }
+        Collections.shuffle(newStrList);
+
+        String result = String.join("", newStrList);
+
+        System.out.println("New str: " + result);
+
+        return result;
+
+    }
 }

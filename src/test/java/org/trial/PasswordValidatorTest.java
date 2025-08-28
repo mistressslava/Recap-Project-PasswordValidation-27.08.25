@@ -348,4 +348,16 @@ public class PasswordValidatorTest {
         assertFalse(PasswordValidator.containsSpecialChar(password));
     }
 
+    @Test
+    void isValid_() {
+
+        String str = PasswordValidator.generateSecurePassword();
+
+        boolean expected = true;
+
+        boolean actual = PasswordValidator.isValid(str);
+
+        assertEquals(expected, actual);
+    }
+
 }
